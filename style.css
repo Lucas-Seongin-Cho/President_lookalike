@@ -1,0 +1,174 @@
+/* General Styles */
+
+body {
+    font-family: 'Jua', sans-serif;
+    background-image: url(Mount_Rushmore_Monument.jpg);
+    background-size: cover;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Section Styles */
+
+.section {
+    margin-top: 50px;
+}
+
+.title, .subtitle-1, .subtitle {
+    font-family: 'Jua', sans-serif;
+    line-height: 1.53;
+    text-align: center;
+}
+
+.title {
+    line-height: 1.67;
+}
+
+.subtitle-1 {
+    color: #000000;
+}
+
+.subtitle {
+    color: rgb(222, 219, 46);
+    margin-bottom: 5%;
+}
+
+/* File Upload Styles */
+
+.file-upload {
+    background-color: #fdfdfd;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.file-upload-content {
+    display: none;
+    text-align: center;
+}
+
+.file-upload-input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.image-upload-wrap {
+    border: 4px dashed #3a36a6;
+    position: relative;
+}
+
+.image-dropping, .image-upload-wrap:hover {
+    background-color: rgb(76, 133, 212);
+    border: 4px dashed #ffffff;
+}
+
+.image-title-wrap {
+    padding: 0 15px 15px 15px;
+    color: #222;
+}
+
+.drag-text {
+    text-align: center;
+}
+
+.drag-text h3 {
+    text-transform: uppercase;
+    color: #000000;
+    padding: 60px 0;
+    font-family: 'Varela Round';
+    font-weight: bold;
+}
+
+.file-upload-image {
+    max-height: 200px;
+    max-width: 200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Animation Styles */
+
+.animated.bounce {
+    font-family: 'Varela Round';
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(54, 12, 45)
+}
+
+/* Try Again Styles */
+
+.try-again-text-wrap {
+    padding: 0 15px 15px 15px;
+    color: #222;
+}
+
+.try-again-btn {
+    width: 60%;
+    margin-top: 5%;
+    color: #fff;
+    background: #35465d;
+    border: solid 1.5px #35465d;
+    padding: 10px;
+    border-radius: 40px;
+    border-bottom: 4px solid #202833;
+    transition: all .2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.try-again-btn:hover {
+    background: #35465d;
+    color: #ffffff;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.try-again-btn:active {
+    border: 0;
+    transition: all .2s ease;
+}
+
+/* Result Message Styles */
+
+.result-message {
+    font-family: 'Varela Round';
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* President Explain Styles */
+
+.president-explain {
+    font-size: 1.5rem;
+}
+
+/* Footer Styles */
+
+/* .footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #000000;
+    text-align: center;
+}
+
+.footer p {
+    font-weight: 50;
+    color: #ffffff;
+}
+
+.footer a, .footer a:visited, .footer a:hover, .footer a:active {
+    color: #ffffff;
+    transition: opacity 2s;
+} */

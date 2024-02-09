@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>President_Look_Alike</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'
+        href='https://fonts.googleapis.com/css?family=Varela Round'>
+    <script src='main.js'></script>
+</head>
+
+<section class="section">
+
+    <body>
+        <h1 class = "title"> President Look Alike </h1>
+        <h2 class="subtitle-1">What President would I be?</h2>
+        <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <div class="file-upload">
+            <div class="image-upload-wrap">
+                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                <div class="drag-text">
+                    <h3>Drag and drop a file or select add Image</h3>
+                </div>
+            </div>
+            <div class="file-upload-content">
+                <img class="file-upload-image" id="president" src="#" alt="your image" />
+                <div id="loading" class="animated bounce">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="text-center">AI is finding your president</p>
+                </div>
+                <p class="result-message"></p>
+                <div id="label-container" class="d-flex flex-column justify-content-around">
+                </div>
+                <div id="bar-chart"></div>
+                <script src="https://d3js.org/d3.v6.min.js"></script>
+
+                <div class="pt-3 image-title-wrap">
+                    <button type="button p-2" class="try-again-btn" onclick="window.location.reload()">
+                        <span class="try-again-text">Try with another image</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+        <script type="text/javascript">
+            const URL = "https://teachablemachine.withgoogle.com/models/xVrIeHDpC/";
+
+            let model, webcam, labelContainer, maxPredictions;
+
+            // Load the image model and setup the webcam
+            async function init() {
+                const modelURL = URL + "model.json";
+                const metadataURL = URL + "metadata.json";
+
+                // load the model and metadata
+                // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+                // or files from your local hard drive
+                // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+                labelContainer = document.getElementById("label-container");
+                for (let i = 0; i < maxPredictions; i++) { // and class labels
+                    labelContainer.appendChild(document.createElement("div"));
+                }
+            }
+
+
+            // run the webcam image through the image model
+            async function predict() {
+                // predict can take in an image, video or canvas html element
+                var image = document.getElementById("president");
+                const prediction = await model.predict(image, false);
+                const president_assign = prediction.slice()
+                prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+                console.log(prediction[0].className);
+                var resultMessage;
+                var resultExpain;
+                switch (prediction[0].className) {
+                    case "Donald J. Trump":
+                        resultMessage = "Donald J. Trump"
+                        resultExplain = "45th President of the United States of America"
+                        break;
+                    case "Millard Fillmore":
+                        resultMessage = "Millard Fillmore"
+                        resultExplain = "13th President of the United States of America"
+                        break;
+                    default:
+                        resultMessage = "Can't Predict"
+                        resultExplain = ""
+                }
+                var title = "<div class='" + prediction[0].className + "-president-title'>" + resultMessage + "</div>"
+                var explain = "<div class='president-explain pt-2'>" + resultExplain + "</div>"
+                $('.result-message').html(title + explain)
+                const data = []
+                const president_list = ["George Washington"]
+                for (let i = 0; i < maxPredictions; i++) {
+                    const classPrediction =
+                        prediction[i].className + ": " + (prediction[i].probability.toFixed(2) * 100) + ' %';
+                    labelContainer.children[i].innerHTML = classPrediction;
+                    data.push({
+                        name: president_assign[i].className,
+                        value: (president_assign[i].probability * 100).toFixed(2),
+                        president: president_list[i]
+                    });
+                }
+            }
+        </script>
+    </body>
+</section>
+
+</html>
